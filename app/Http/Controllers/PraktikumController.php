@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\DB;
 use App\Models\Hotel;
@@ -66,7 +66,12 @@ class PraktikumController extends Controller
         ]);
         return redirect('/pengunjung');
     }
-    
-    
+   public function generate()
+{
+$pengunjung = \App\Models\pengunjung::All();
+$pdf =
+PDF::loadview('pengunjung_pdf',['pengunjung'=>$pengunjung]);
+return $pdf->stream();
+}
     
 }
